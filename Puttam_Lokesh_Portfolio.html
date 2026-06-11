@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Puttam Lokesh – Software Engineer & Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:        #0A0E1A;
+    --surface:   #111827;
+    --card:      #1A2235;
+    --border:    #1F2D44;
+    --accent:    #00C2FF;
+    --accent2:   #7C3AED;
+    --accent3:   #10B981;
+    --text:      #E8EDF5;
+    --muted:     #8896AB;
+    --mono:      'JetBrains Mono', monospace;
+    --sans:      'Space Grotesk', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 48px;
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500;
+    color: var(--muted); text-decoration: none;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,194,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,194,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+    top: 10%; right: -100px;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; max-width: 900px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12px;
+    color: var(--accent); background: rgba(0,194,255,0.08);
+    border: 1px solid rgba(0,194,255,0.2);
+    padding: 6px 14px; border-radius: 4px;
+    letter-spacing: 0.1em; margin-bottom: 28px;
+  }
+  .hero-tag::before { content: "●"; font-size: 8px; animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .hero-name {
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .hero-name span { color: var(--accent); }
+
+  .hero-title {
+    font-family: var(--mono); font-size: 16px;
+    color: var(--muted); margin-bottom: 24px;
+    letter-spacing: 0.04em;
+  }
+  .hero-title em { color: var(--accent3); font-style: normal; }
+
+  .hero-desc {
+    font-size: 17px; color: var(--muted);
+    max-width: 580px; line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 14px 32px; border-radius: 6px;
+    background: var(--accent); color: #0A0E1A;
+    font-family: var(--sans); font-weight: 600; font-size: 14px;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: all 0.2s; border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: #33cfff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,194,255,0.3); }
+  .btn-outline {
+    padding: 14px 32px; border-radius: 6px;
+    border: 1px solid var(--border); color: var(--text);
+    font-family: var(--sans); font-weight: 500; font-size: 14px;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: all 0.2s; background: transparent;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 60px;
+    padding-top: 40px; border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num { font-size: 28px; font-weight: 700; color: var(--accent); font-family: var(--mono); }
+  .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 48px; max-width: 1200px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-eyebrow::after {
+    content: ""; flex: 1; max-width: 60px;
+    height: 1px; background: var(--accent); opacity: 0.4;
+  }
+  .section-title {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 48px;
+  }
+  .section-title span { color: var(--accent); }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+  }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 16px; font-size: 15.5px; }
+  .about-info { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+  .info-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; border-radius: 8px;
+    background: var(--card); border: 1px solid var(--border);
+  }
+  .info-icon { font-size: 18px; }
+  .info-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .info-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .skill-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .skill-icon { font-size: 22px; }
+  .skill-cat { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--muted); background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 4px;
+    letter-spacing: 0.03em;
+  }
+  .tag.hot { color: var(--accent); border-color: rgba(0,194,255,0.25); background: rgba(0,194,255,0.06); }
+
+  /* ── EXPERIENCE ── */
+  .exp-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 32px; margin-bottom: 24px;
+    transition: border-color 0.2s;
+  }
+  .exp-card:hover { border-color: var(--accent2); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+  .exp-role { font-size: 18px; font-weight: 600; color: var(--text); }
+  .exp-period {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--accent); background: rgba(0,194,255,0.08);
+    border: 1px solid rgba(0,194,255,0.2);
+    padding: 4px 12px; border-radius: 4px;
+  }
+  .exp-company { font-size: 14px; color: var(--accent3); font-weight: 500; margin-bottom: 18px; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .exp-bullets li {
+    font-size: 14.5px; color: var(--muted); line-height: 1.65;
+    padding-left: 18px; position: relative;
+  }
+  .exp-bullets li::before {
+    content: "▸"; position: absolute; left: 0;
+    color: var(--accent); font-size: 10px; top: 5px;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover { border-color: transparent; transform: translateY(-4px); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent2); letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+  .project-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+  .project-desc { font-size: 14px; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 20px; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 32px;
+    display: flex; gap: 24px; align-items: flex-start;
+  }
+  .edu-icon {
+    width: 52px; height: 52px; border-radius: 10px;
+    background: rgba(0,194,255,0.1); border: 1px solid rgba(0,194,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .edu-degree { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .edu-school { font-size: 14px; color: var(--accent3); font-weight: 500; margin-bottom: 8px; }
+  .edu-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+  .edu-badge {
+    font-family: var(--mono); font-size: 12px;
+    padding: 3px 10px; border-radius: 4px;
+  }
+  .edu-badge.cgpa { color: var(--accent); background: rgba(0,194,255,0.08); border: 1px solid rgba(0,194,255,0.2); }
+  .edu-badge.year { color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); }
+  .edu-badge.clean { color: var(--accent3); background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); }
+
+  /* ── CERTIFICATIONS ── */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 22px;
+    display: flex; align-items: center; gap: 14px;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent3); }
+  .cert-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent3); flex-shrink: 0; }
+  .cert-title { font-size: 13.5px; font-weight: 500; color: var(--text); }
+  .cert-issuer { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ── CONTACT ── */
+  #contact { text-align: center; }
+  .contact-inner {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 64px 48px; position: relative; overflow: hidden;
+  }
+  .contact-glow {
+    position: absolute; width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,194,255,0.06) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+    pointer-events: none;
+  }
+  .contact-tagline { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
+  .contact-email {
+    font-family: var(--mono); font-size: 20px; font-weight: 500;
+    color: var(--accent); text-decoration: none;
+    display: inline-block; margin: 24px 0 32px;
+    padding: 12px 28px; border: 1px solid rgba(0,194,255,0.3);
+    border-radius: 8px; background: rgba(0,194,255,0.05);
+    transition: all 0.2s;
+  }
+  .contact-email:hover { background: rgba(0,194,255,0.12); box-shadow: 0 0 24px rgba(0,194,255,0.15); }
+  .social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .social-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 22px; border-radius: 8px;
+    border: 1px solid var(--border); color: var(--muted);
+    text-decoration: none; font-size: 13px; font-weight: 500;
+    transition: all 0.2s;
+  }
+  .social-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  footer p { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  footer span { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    #hero { padding: 100px 24px 60px; }
+    section { padding: 72px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 32px; }
+    footer { padding: 24px; flex-direction: column; text-align: center; }
+    .contact-inner { padding: 40px 24px; }
+    .edu-card { flex-direction: column; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.6s ease forwards; }
+  .fade-up:nth-child(2) { animation-delay: 0.1s; }
+  .fade-up:nth-child(3) { animation-delay: 0.2s; }
+  .fade-up:nth-child(4) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PL.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag fade-up">Available for Opportunities</div>
+    <h1 class="hero-name fade-up">Puttam<br/><span>Lokesh</span></h1>
+    <p class="hero-title fade-up">Software Engineer &amp; <em>Data Analytics</em> Specialist</p>
+    <p class="hero-desc fade-up">
+      B.Tech IT graduate (CGPA 8.07) from Nellore, Andhra Pradesh. I build full-stack applications,
+      data pipelines, and analytics platforms — and I'm always learning what's next.
+    </p>
+    <div class="hero-cta fade-up">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats fade-up">
+      <div class="stat-item"><span class="stat-num">8.07</span><span class="stat-label">CGPA</span></div>
+      <div class="stat-item"><span class="stat-num">10+</span><span class="stat-label">Projects Built</span></div>
+      <div class="stat-item"><span class="stat-num">5+</span><span class="stat-label">Certifications</span></div>
+      <div class="stat-item"><span class="stat-num">2025</span><span class="stat-label">Pass Out</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow">About Me</div>
+  <h2 class="section-title">Who I <span>Am</span></h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a detail-oriented and analytical IT graduate with a strong passion for software engineering, data analytics, and cloud technologies. I enjoy solving real-world problems through code — whether that's building scalable web applications, designing data pipelines, or creating machine learning models.</p>
+      <p>My approach is simple: understand the problem deeply, choose the right tools, and deliver clean, maintainable solutions. I thrive in collaborative environments and constantly push myself to explore new technologies.</p>
+      <p>Currently seeking opportunities where I can contribute immediately, grow continuously, and make a meaningful impact through technology.</p>
+    </div>
+    <div class="about-info">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div><div class="info-label">Location</div><div class="info-value">Nellore, Andhra Pradesh, India</div></div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📧</span>
+        <div><div class="info-label">Email</div><div class="info-value">puttamlokesh9550@gmail.com</div></div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📱</span>
+        <div><div class="info-label">Phone</div><div class="info-value">+91 9550711510</div></div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">💼</span>
+        <div><div class="info-label">Status</div><div class="info-value">Immediate Joiner ✅</div></div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">🎓</span>
+        <div><div class="info-label">Education</div><div class="info-value">B.Tech IT – NBKR Institute</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--surface); max-width: 100%; padding: 100px 0;">
+<div style="max-width:1200px; margin:0 auto; padding: 0 48px;">
+  <div class="section-eyebrow">Technical Expertise</div>
+  <h2 class="section-title">My <span>Skills</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-header"><span class="skill-icon">🐍</span><span class="skill-cat">Programming Languages</span></div>
+      <div class="skill-tags">
+        <span class="tag hot">Python</span><span class="tag hot">Java</span><span class="tag hot">SQL</span>
+        <span class="tag">PHP</span><span class="tag">JavaScript</span><span class="tag">Bash</span><span class="tag">C</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header"><span class="skill-icon">🌐</span><span class="skill-cat">Web Development</span></div>
+      <div class="skill-tags">
+        <span class="tag hot">Django</span><span class="tag hot">Flask</span><span class="tag hot">Spring Boot</span>
+        <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Bootstrap</span><span class="tag">REST API</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header"><span class="skill-icon">📊</span><span class="skill-cat">Data Analytics & BI</span></div>
+      <div class="skill-tags">
+        <span class="tag hot">Power BI</span><span class="tag hot">Tableau</span><span class="tag hot">Pandas</span>
+        <span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Excel</span><span class="tag">Seaborn</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header"><span class="skill-icon">🤖</span><span class="skill-cat">Machine Learning & AI</span></div>
+      <div class="skill-tags">
+        <span class="tag hot">Scikit-learn</span><span class="tag hot">TensorFlow</span><span class="tag">Keras</span>
+        <span class="tag">NLP</span><span class="tag">spaCy</span><span class="tag">HuggingFace</span><span class="tag">XGBoost</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header"><span class="skill-icon">🗄️</span><span class="skill-cat">Databases</span></div>
+      <div class="skill-tags">
+        <span class="tag hot">MySQL</span><span class="tag hot">SQL Server</span><span class="tag hot">SQLite</span>
+        <span class="tag">BigQuery</span><span class="tag">ClickHouse</span><span class="tag">PostgreSQL</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header"><span class="skill-icon">☁️</span><span class="skill-cat">Cloud & DevOps</span></div>
+      <div class="skill-tags">
+        <span class="tag hot">Docker</span><span class="tag hot">Kubernetes</span><span class="tag hot">Jenkins</span>
+        <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Git</span><span class="tag">Ansible</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header"><span class="skill-icon">🔧</span><span class="skill-cat">Data Engineering</span></div>
+      <div class="skill-tags">
+        <span class="tag hot">Apache Airflow</span><span class="tag hot">PySpark</span><span class="tag">ETL Pipelines</span>
+        <span class="tag">Kafka</span><span class="tag">Apache Beam</span><span class="tag">DataOps</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-header"><span class="skill-icon">🧪</span><span class="skill-cat">Testing & QA</span></div>
+      <div class="skill-tags">
+        <span class="tag hot">Pytest</span><span class="tag hot">Selenium</span><span class="tag">Unit Testing</span>
+        <span class="tag">GitHub Copilot</span><span class="tag">Postman</span><span class="tag">CI/CD Testing</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow">Work History</div>
+  <h2 class="section-title">My <span>Experience</span></h2>
+  <div class="exp-card">
+    <div class="exp-header">
+      <div class="exp-role">QA Engineer Intern</div>
+      <div class="exp-period">04 Jun 2025 – 31 May 2026</div>
+    </div>
+    <div class="exp-company">CVCorp &nbsp;·&nbsp; Hybrid &nbsp;·&nbsp; 1 Year</div>
+    <ul class="exp-bullets">
+      <li>Designed, wrote, and executed comprehensive test plans and test cases for web application features and network-integrated system modules, ensuring product quality and reliability across functional, regression, and integration test cycles.</li>
+      <li>Developed and maintained Python-based automation scripts to automate repetitive test scenarios, reducing manual testing effort by 35% and improving overall test coverage across multiple product releases.</li>
+      <li>Reproduced customer-reported issues and system defects in controlled lab environments, collaborating closely with development and platform teams to debug, document, and resolve root-cause failures.</li>
+      <li>Utilised AI-assisted development tools including GitHub Copilot to accelerate automation script writing and test case generation, improving testing efficiency by 25%.</li>
+      <li>Collaborated in Agile sprint cycles with developers, product managers, and QA leads to align testing scope with release goals, ensuring on-time delivery across 8+ sprint cycles.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: var(--surface); max-width: 100%; padding: 100px 0;">
+<div style="max-width:1200px; margin:0 auto; padding: 0 48px;">
+  <div class="section-eyebrow">What I've Built</div>
+  <h2 class="section-title">Featured <span>Projects</span></h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-num">PROJECT 01</div>
+      <div class="project-title">Credit Card Fraud Detection System</div>
+      <div class="project-desc">ML-based fraud detection classifying transactions as fraudulent or legitimate. Implemented Random Forest & XGBoost with SMOTE, achieving 88% F1-score. Real-time risk scoring with SQLite logging and trend visualisation.</div>
+      <div class="project-stack">
+        <span class="tag hot">Python</span><span class="tag">Scikit-learn</span><span class="tag">XGBoost</span><span class="tag">Pandas</span><span class="tag">SHAP</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">PROJECT 02</div>
+      <div class="project-title">Scalable Data Pipeline & Warehouse</div>
+      <div class="project-desc">End-to-end ETL pipeline ingesting 5M+ records into SQL Server data warehouse. Orchestrated via Apache Airflow DAGs with PySpark distributed processing, Azure Data Factory integration, and Docker deployment.</div>
+      <div class="project-stack">
+        <span class="tag hot">PySpark</span><span class="tag">Airflow</span><span class="tag">Azure</span><span class="tag">Docker</span><span class="tag">SQL Server</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">PROJECT 03</div>
+      <div class="project-title">CI/CD Pipeline for Analytics Platform</div>
+      <div class="project-desc">Full CI/CD automation using Jenkins & GitHub Actions. Containerised app deployed on Kubernetes with rolling updates. Maven build + automated test stages + Bash deployment scripts reduced manual effort by 60%.</div>
+      <div class="project-stack">
+        <span class="tag hot">Jenkins</span><span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">Maven</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">PROJECT 04</div>
+      <div class="project-title">IT Helpdesk & Ticketing System</div>
+      <div class="project-desc">Full-stack ITIL-compliant IT service management app with SLA-based escalation, priority queues, role dashboards, and automated resolution reporting. Built with Django + MySQL with complete incident lifecycle management.</div>
+      <div class="project-stack">
+        <span class="tag hot">Django</span><span class="tag">MySQL</span><span class="tag">Python</span><span class="tag">Bootstrap</span><span class="tag">REST API</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">PROJECT 05</div>
+      <div class="project-title">Multilingual NLP Sentiment Analyser</div>
+      <div class="project-desc">Fine-tuned BERT & mBERT transformer models for multilingual sentiment classification. Conducted systematic ablation studies across BERT, RoBERTa, DistilBERT achieving 89% accuracy on English benchmarks.</div>
+      <div class="project-stack">
+        <span class="tag hot">HuggingFace</span><span class="tag">PyTorch</span><span class="tag">BERT</span><span class="tag">NLP</span><span class="tag">Python</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">PROJECT 06</div>
+      <div class="project-title">Business Analytics BI Dashboard</div>
+      <div class="project-desc">End-to-end BI solution with Power BI dashboards, DAX KPI measures, and Python ETL pipelines. MoM growth tracking, YTD revenue analysis, and regional performance visualisation for business stakeholders.</div>
+      <div class="project-stack">
+        <span class="tag hot">Power BI</span><span class="tag">DAX</span><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Pandas</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">PROJECT 07</div>
+      <div class="project-title">AI-Powered Resume Screening Tool</div>
+      <div class="project-desc">NLP-based web app using TF-IDF cosine similarity to auto-match resumes to job descriptions. spaCy for skill extraction, Flask backend with PDF/DOCX parsing, recruiter dashboard with candidate rankings.</div>
+      <div class="project-stack">
+        <span class="tag hot">spaCy</span><span class="tag">Flask</span><span class="tag">NLP</span><span class="tag">MySQL</span><span class="tag">TF-IDF</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">PROJECT 08</div>
+      <div class="project-title">Wireless Network QA Automation</div>
+      <div class="project-desc">Python + Pytest framework automating wireless network device validation. SSH-based config automation with Paramiko, TCP/IP & DHCP test suites, YAML parameterised configs — 90% automated test coverage.</div>
+      <div class="project-stack">
+        <span class="tag hot">Pytest</span><span class="tag">Paramiko</span><span class="tag">Python</span><span class="tag">Bash</span><span class="tag">Networking</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-eyebrow">Academic Background</div>
+  <h2 class="section-title">My <span>Education</span></h2>
+  <div class="edu-card">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-degree">Bachelor of Technology – Information Technology</div>
+      <div class="edu-school">N.B.K.R Institute of Science and Technology, Nellore, Andhra Pradesh</div>
+      <div class="edu-meta">
+        <span class="edu-badge cgpa">CGPA: 8.07</span>
+        <span class="edu-badge year">Sep 2022 – May 2025</span>
+        <span class="edu-badge clean">No Active Backlogs ✓</span>
+        <span class="edu-badge year">2025 Pass-Out</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" style="background: var(--surface); max-width: 100%; padding: 100px 0;">
+<div style="max-width:1200px; margin:0 auto; padding: 0 48px;">
+  <div class="section-eyebrow">Credentials</div>
+  <h2 class="section-title">My <span>Certifications</span></h2>
+  <div class="cert-grid">
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">Deep Learning Specialisation</div><div class="cert-issuer">DeepLearning.AI / Coursera (Andrew Ng)</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">Google Data Analytics Professional</div><div class="cert-issuer">Google / Coursera</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">Microsoft Azure Fundamentals (AZ-900)</div><div class="cert-issuer">Microsoft Learn</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">AWS Cloud Practitioner Essentials</div><div class="cert-issuer">Amazon Web Services</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">Power BI Data Analyst (PL-300)</div><div class="cert-issuer">Microsoft Learn / Coursera</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">Docker & Kubernetes Complete Guide</div><div class="cert-issuer">Udemy / KodeKloud</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">SQL for Data Science</div><div class="cert-issuer">UC Davis / Coursera</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">Python for Data Science & AI</div><div class="cert-issuer">IBM / Coursera</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">CCNA – Cisco Networking (In Progress)</div><div class="cert-issuer">Cisco Networking Academy</div></div></div>
+    <div class="cert-card"><div class="cert-dot"></div><div><div class="cert-title">Machine Learning Specialisation</div><div class="cert-issuer">Stanford University / Coursera</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Get In Touch</div>
+  <h2 class="section-title" style="text-align:center">Let's <span>Connect</span></h2>
+  <div class="contact-inner">
+    <div class="contact-glow"></div>
+    <p class="contact-tagline">I'm actively looking for full-time opportunities. Feel free to reach out!</p>
+    <a href="mailto:puttamlokesh9550@gmail.com" class="contact-email">puttamlokesh9550@gmail.com</a>
+    <div class="social-links">
+      <a href="https://linkedin.com/in/Puttam Lokesh" class="social-btn" target="_blank">
+        <span>💼</span> LinkedIn
+      </a>
+      <a href="https://github.com/Lokesh-9550" class="social-btn" target="_blank">
+        <span>🐙</span> GitHub
+      </a>
+      <a href="tel:+919550711510" class="social-btn">
+        <span>📱</span> +91 9550711510
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built by <span>Puttam Lokesh</span></p>
+  <p>puttamlokesh9550@gmail.com &nbsp;·&nbsp; Nellore, Andhra Pradesh</p>
+</footer>
+
+</body>
+</html>
